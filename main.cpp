@@ -5,7 +5,7 @@
 
 void dijkstra(int length[V][V], int dist[V],int source);
 void addEdge(int length[V][V],int u, int v, int w);
-int minDistIndex(int dist[V]);
+int minDistIndex(int dist[V], bool visited[V]);
 void printGraph(int length[V][V]);
 bool validRange(int u, int v);
 void printResults(int dist[V]);
@@ -27,14 +27,9 @@ int main(){
     
     //printGraph(length);
     //std::cout << minDistIndex(dist) << '\n';
-    for(int i{0}; i < V; ++i){
-        dist[i] = INF;
-    }
 
-    dist[4] = 0;
-    std::cout << minDistIndex(dist) << '\n';
-    //dijkstra(length,dist,0);
-   //printResults(dist);
+    dijkstra(length,dist,0);
+    printResults(dist);
 
     
     //(label, dist)
@@ -49,40 +44,42 @@ void printResults(int dist[V]){
 }
 
 void dijkstra(int length[V][V], int dist[V],int source){
-    std::vector<int> Q;
+    bool visited[V]{false};
     for(int i{}; i < V; ++i){
         dist[i] = INF;
-        Q.push_back(i);
     }
-    dist[source] = 0;
 
-    while(!Q.empty()){
-        int v = minDistIndex(dist);
-        Q.erase(Q.begin() + v);
-        for(int u{}; u < V; ++u){
-            int alt = dist[v] + length[v][u];
-            if(alt < dist[u])
-                dist[u] = alt;
-            
+    dist[source] = 0;
+    int v{};
+    for (int count = 0; count < V ; count++) {//iterate through all vertices in graph
+        v = minDistIndex(dist,visited);
+        visited[v] = true;
+
+        for(int u{}; u < V; ++u){//check all existing edges incident to vertex
+            if(!visited[u] && length[v][u]  && dist[v] + length[v][u] < dist[u])// not visited && edge exists && checking if new path is smaller
+                dist[u] = dist[v] + length[v][u];
         }
+
 
     }
 
 }
 
-int minDistIndex(int dist[V]){
-    int min = dist[0];
-    int mp{};
+int minDistIndex(int dist[V], bool visited[V]){
+    int min = INF;
+    int min_index{};
     for(int i{}; i < V; ++i){
-        int curr = dist[i];
-        if(curr < min){
-            mp = i;
-            min = curr;
+        if(!visited[i]){
+            int curr = dist[i];
+            if(curr <= min){
+                min_index = i;
+                min = curr;
+            }
         }
     }
 
 
-    return mp;
+    return min_index;
 }
 
 void addEdge(int length[V][V],int u, int v, int w){
