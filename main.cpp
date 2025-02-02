@@ -56,7 +56,7 @@ void dijkstra(int length[V][V], int dist[V],int source){
         visited[v] = true;
 
         for(int u{}; u < V; ++u){//check all existing edges incident to vertex
-            if(!visited[u] && length[v][u]  && dist[v] + length[v][u] < dist[u])// not visited && edge exists && checking if new path is smaller
+            if(!visited[u] && length[v][u]  && dist[v] != INT_MAX &&dist[v] + length[v][u] < dist[u])// not visited && edge exists && dont add inf && checking if new path is smaller 
                 dist[u] = dist[v] + length[v][u];
         }
 
