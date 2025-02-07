@@ -19,7 +19,7 @@ class Graph{
     public:
         Graph(int V);
         void addEdge(int u, int v, int w);
-        void shortestPath(int s);
+        void shortestPath(int s,std::vector <int> &dist);
         int countEdges(int V,std::list<iPair>* adjL);
         std::list<iPair>* getadj(){return adj;}
         int getnV(){ return V; } //returns number of vertices

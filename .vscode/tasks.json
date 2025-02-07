@@ -15,7 +15,7 @@
                 "-lsfml-graphics",
                 "-lsfml-window",
                 "-lsfml-audio",
-                "-lsfml-system",
+                "-lsfml-system"
             ],
             "group": "build",
             "problemMatcher": [

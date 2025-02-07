@@ -10,10 +10,9 @@ void Graph::addEdge(int u, int v, int w){
     adj[v].push_back({u,w});
 }
 
-void Graph::shortestPath(int source){
+void Graph::shortestPath(int source,std::vector <int>& dist){
     std::priority_queue <iPair,std::vector<iPair>, std::greater<iPair>> pq;
 
-    std::vector <int> dist(V,INF);
     std::vector <int> path(V, source);
     pq.push({source,0});
     dist[source] = 0;

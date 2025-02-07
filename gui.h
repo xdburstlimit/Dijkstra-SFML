@@ -7,6 +7,8 @@ using namespace sf;
 
 #define PI 3.141592653589793
 
+#define INF 0x3f3f3f3f
+
 class gui{
     private:
         Vector2u window_res;
@@ -24,7 +26,7 @@ class gui{
         void addEdges(int u,int v, int w, Graph g);
         void addEdgesGUI(int V, std::list<iPair>* adj, Sprite guiVertex[],sf::Vertex line[][2]);
         void vertexInputGUI(int& V);
-        void edgeInputGUI(Graph g);
+        void edgeInputGUI(Graph& g,int V);
         void buildGraph();
         void buildGraphGUI();
         void start();
